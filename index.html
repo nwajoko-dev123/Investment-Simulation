@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monte Carlo FIRE Simulator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <header class="hero">
+      <p class="eyebrow">Monte Carlo Simulation</p>
+      <h1>Will your money outlive you, or the other way around?</h1>
+      <p class="sub">Run hundreds of randomized market scenarios against your savings plan and see the real odds of reaching financial independence — instead of one optimistic straight-line projection.</p>
+    </header>
+
+    <div class="layout">
+
+      <aside class="controls">
+        <h2>Your numbers</h2>
+
+        <div class="field">
+          <label for="starting">Starting portfolio <span class="field-value" id="starting-out"></span></label>
+          <input type="range" id="starting" min="0" max="200000" step="1000" value="20000">
+        </div>
+
+        <div class="field">
+          <label for="contribution">Monthly contribution <span class="field-value" id="contribution-out"></span></label>
+          <input type="range" id="contribution" min="0" max="10000" step="50" value="1000">
+        </div>
+
+        <div class="field">
+          <label for="years">Time horizon <span class="field-value" id="years-out"></span></label>
+          <input type="range" id="years" min="5" max="50" step="1" value="30">
+        </div>
+
+        <div class="field">
+          <label for="meanReturn">Expected annual return <span class="field-value" id="meanReturn-out"></span></label>
+          <input type="range" id="meanReturn" min="0" max="15" step="0.5" value="7">
+        </div>
+
+        <div class="field">
+          <label for="volatility">Market volatility <span class="field-value" id="volatility-out"></span></label>
+          <input type="range" id="volatility" min="0" max="30" step="0.5" value="15">
+        </div>
+
+        <div class="field">
+          <label for="expenses">Annual expenses in retirement <span class="field-value" id="expenses-out"></span></label>
+          <input type="range" id="expenses" min="10000" max="150000" step="1000" value="40000">
+        </div>
+
+        <div class="field">
+          <label for="numSims">Simulations to run <span class="field-value" id="numSims-out"></span></label>
+          <input type="range" id="numSims" min="50" max="500" step="50" value="200">
+        </div>
+
+        <button id="run-btn">Run Simulation</button>
+      </aside>
+
+      <main class="results">
+        <div class="chart-wrap">
+          <canvas id="chart"></canvas>
+        </div>
+
+        <div class="legend">
+          <span><i class="dot" style="background:#D4A24E"></i> Median outcome</span>
+          <span><i class="dot" style="background:rgba(212,162,78,0.5)"></i> 10th–90th percentile range</span>
+          <span><i class="dot" style="background:#5B9C95"></i> Individual simulations</span>
+          <span><i class="dot" style="background:#C25B4A"></i> FIRE number (25x expenses)</span>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat">
+            <span class="stat-label">Probability of success</span>
+            <span class="stat-value" id="stat-probability">0%</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Median ending balance</span>
+            <span class="stat-value" id="stat-median">$0</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">10th percentile</span>
+            <span class="stat-value" id="stat-p10">$0</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">90th percentile</span>
+            <span class="stat-value" id="stat-p90">$0</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">Median year FI reached</span>
+            <span class="stat-value" id="stat-fi-year">—</span>
+          </div>
+        </div>
+      </main>
+
+    </div>
+
+    <footer>
+      <p>Educational simulation only, not financial advice. Returns are randomly generated from a normal distribution around your inputs and don't account for fees, taxes, or sequence-of-returns risk in withdrawal phases.</p>
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
